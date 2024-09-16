@@ -19,10 +19,10 @@ class BottomBar(ft.BottomAppBar):
         super().__init__(
             content=ft.Row(
                 controls=[
-                    BarButton(texto='Horas', icone=ft.icons.TIMER_ROUNDED, estado='ativo'),
-                    BarButton(texto='Horas', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo'),
-                    BarButton(texto='Horas', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo'),
-                    BarButton(texto='Horas', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo')
+                    BarButton(texto='Horas extras', icone=ft.icons.TIMER_ROUNDED, estado='ativo'),
+                    BarButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo'),
+                    BarButton(texto='Décimo terceiro', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo'),
+                    BarButton(texto='Rescisão', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo')
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_EVENLY
             ),
