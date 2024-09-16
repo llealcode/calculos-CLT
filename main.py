@@ -1,11 +1,9 @@
+from utils import settings
 import flet as ft
 
-from utils.setup import layout
-
-
 def main(page: ft.Page):
-    
-    layout(page=page)
 
+    settings.layout(page=page)
 
-ft.app(target=main, assets_dir='assets')
+ft.app(target=main)
+
