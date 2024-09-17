@@ -1,5 +1,6 @@
 import flet as ft
 from pages.home import ViewHome
+from pages.horas import ViewHoras
 from components.components import UpperBar, BottomBar
 
 
@@ -11,8 +12,10 @@ def layout(page):
     # Tamanho da janela e posicionamento    
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
-    page.window.maximizable = False
+    page.window.maximizable = True
     page.window.resizable = True
+    page.window.height = 600
+    page.window.width = 390
     page.window.center()
     page.update()
 
@@ -32,7 +35,7 @@ def layout(page):
     # Rotas
     class ViewsPage(ft.View):
 
-        def __init__(self, rota, conteudo):
+        def __init__(self, rota, conteudo, *args):
             self.rota = rota
             self.conteudo = conteudo
 
@@ -41,13 +44,15 @@ def layout(page):
                 controls=[self.conteudo],
                 padding=0,
                 spacing=0,
-                bottom_appbar=BottomBar(page=page),
                 appbar=UpperBar(page=page)
             )
 
     def mudar_rota(e):
         page.views.clear()
-        page.views.append(ViewsPage(rota=page.route, conteudo=ViewHome(page=page)))
+        if page.route == "/":
+            page.views.append(ViewsPage(rota=page.route, conteudo=ViewHome(page=page)))
+        if page.route =="/horas":
+            page.views.append(ViewsPage(rota=page.route, conteudo=ViewHoras(page=page)))
 
         page.update()
 

@@ -19,10 +19,10 @@ class BottomBar(ft.BottomAppBar):
         super().__init__(
             content=ft.Row(
                 controls=[
-                    BarButton(texto='Horas extras', icone=ft.icons.TIMER_ROUNDED, estado='ativo'),
+                    BarButton(texto='Horas', icone=ft.icons.TIMER_ROUNDED, estado='ativo'),
                     BarButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo'),
-                    BarButton(texto='Décimo terceiro', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo'),
-                    BarButton(texto='Rescisão', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo')
+                    BarButton(texto='Rescisão', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo'),
+                    BarButton(texto='13º', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo')
                 ],
                 alignment=ft.MainAxisAlignment.SPACE_EVENLY
             ),
@@ -40,7 +40,7 @@ class BarButton(ft.IconButton):
         super().__init__(
             content=ft.Column(
                 controls=[
-                    ft.Icon(name=self.icone, color=ft.colors.WHITE if not estado=='ativo' else ft.colors.GREEN),
+                    ft.Icon(name=self.icone, color=ft.colors.WHITE if estado=='ativo' else ft.colors.GREY_800),
                     ft.Text(value=self.texto, color=ft.colors.WHITE)
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER
@@ -119,6 +119,32 @@ class CalcButton(ft.ElevatedButton):
         )
 
 
+class OptionButton(ft.ElevatedButton):
+
+    def __init__(self, texto, icone, rota, page):
+        self.texto = texto
+        self.icone = icone
+        self.rota = rota
+
+        super().__init__(
+            text=texto,
+            icon=icone,
+            style=ft.ButtonStyle(
+                overlay_color=ft.colors.GREY_700,
+                color=ft.colors.WHITE,
+                shape=ft.RoundedRectangleBorder(radius=5),
+            ),
+            width=200,
+            height=45,
+            on_click=lambda _: page.go(self.rota)
+            )
 
 
+class HomePageMessage(ft.Text):
 
+    def __init__(self):
+
+        super().__init__(
+            value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+            max_lines=6
+        )
