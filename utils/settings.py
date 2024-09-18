@@ -58,4 +58,4 @@ def layout(page):
 
 
     page.on_route_change = mudar_rota
-    page.go('/')
+    page.go('/horas')
