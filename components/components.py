@@ -113,7 +113,6 @@ class CalcButton(ft.ElevatedButton):
                 color=ft.colors.WHITE,
                 shape=ft.RoundedRectangleBorder(radius=5),
             ),
-            width=370,
             height=45,
             on_click=calc
         )

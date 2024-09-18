@@ -16,7 +16,7 @@ def layout(page):
     page.window.resizable = True
     page.window.height = 600
     page.window.width = 390
-    page.window.center()
+    # page.window.center()
     page.update()
 
     # Comportamento, espaçamento e margins
@@ -59,4 +59,4 @@ def layout(page):
 
 
     page.on_route_change = mudar_rota
-    page.go('/')
+    page.go('/horas')
