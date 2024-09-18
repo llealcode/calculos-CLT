@@ -13,8 +13,7 @@ class ViewHoras(ft.Container):
                     CampoTxt(texto="Jornada"),
                     CampoTxt(texto="Horas trabalhadas"),
                     CampoTxt(texto="Taxa adicional"),
-                    ft.ElevatedButton("Voltar", on_click=lambda _: self.page.go("/")),
-                    BottomBar(page=page)
+                    ft.ElevatedButton("Voltar", on_click=lambda _: self.page.go("/"))
                 ]
             )
         )

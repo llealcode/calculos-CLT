@@ -35,7 +35,7 @@ def layout(page):
     # Rotas
     class ViewsPage(ft.View):
 
-        def __init__(self, rota, conteudo, *args):
+        def __init__(self, rota, conteudo, **kwargs):
             self.rota = rota
             self.conteudo = conteudo
 
@@ -44,7 +44,8 @@ def layout(page):
                 controls=[self.conteudo],
                 padding=0,
                 spacing=0,
-                appbar=UpperBar(page=page)
+                appbar=UpperBar(page=page),
+                **kwargs
             )
 
     def mudar_rota(e):
@@ -52,7 +53,7 @@ def layout(page):
         if page.route == "/":
             page.views.append(ViewsPage(rota=page.route, conteudo=ViewHome(page=page)))
         if page.route =="/horas":
-            page.views.append(ViewsPage(rota=page.route, conteudo=ViewHoras(page=page)))
+            page.views.append(ViewsPage(rota=page.route, conteudo=ViewHoras(page=page), bottom_appbar=BottomBar(page=page)))
 
         page.update()
 
