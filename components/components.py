@@ -30,7 +30,7 @@ class BottomBar(ft.BottomAppBar):
             height=page.height*0.12
         )
 
-class BarButton(ft.IconButton):
+class BarButton(ft.Container):
     
     def __init__(self, texto, icone, estado):
         self.texto=texto
@@ -40,8 +40,8 @@ class BarButton(ft.IconButton):
         super().__init__(
             content=ft.Column(
                 controls=[
-                    ft.Icon(name=self.icone, color=ft.colors.WHITE if estado=='ativo' else ft.colors.GREY_800),
-                    ft.Text(value=self.texto, color=ft.colors.WHITE)
+                    icon_button:=ft.Icon(name=self.icone, color=ft.colors.WHITE if estado=='ativo' else ft.colors.GREY_800),
+                    icon_text:=ft.Text(value=self.texto, color=ft.colors.WHITE)
                 ],
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER
             )
@@ -118,7 +118,7 @@ class CalcButton(ft.ElevatedButton):
         )
 
 
-class OptionButton(ft.ElevatedButton):
+class OptionButton(ft.IconButton):
 
     def __init__(self, texto, icone, rota, page):
         self.texto = texto
