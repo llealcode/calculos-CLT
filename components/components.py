@@ -73,16 +73,14 @@ class Headers(ft.Text):
 
 class CampoTxt(ft.Column):
     
-    def __init__(self, texto, prefix=None):
+    def __init__(self, texto, **kwargs):
         self.texto = texto
-        self.prefix = prefix
 
         super().__init__(
             controls=[
                 ft.Text(value=self.texto, size=13, color=ft.colors.WHITE),
                 ft.TextField(
                     height=45,
-                    prefix_text=self.prefix,
                     content_padding=ft.padding.symmetric(horizontal=10),
                     border_radius=ft.border_radius.all(3),
                     border_width=0.5,
@@ -92,7 +90,8 @@ class CampoTxt(ft.Column):
                     text_align=ft.TextAlign.START,
                     keyboard_type=ft.KeyboardType.NUMBER,
                     cursor_color=ft.colors.GREY_300,
-                    cursor_width=0.7
+                    cursor_width=0.7,
+                    **kwargs
                 )
             ],
             spacing=7
@@ -109,11 +108,12 @@ class CalcButton(ft.ElevatedButton):
             text='Calcular',
             icon=ft.icons.CALCULATE_ROUNDED,
             style=ft.ButtonStyle(
-                bgcolor=ft.colors.GREEN,
+                bgcolor=ft.colors.GREEN_800,
                 color=ft.colors.WHITE,
                 shape=ft.RoundedRectangleBorder(radius=5),
             ),
             height=45,
+            expand=True,
             on_click=calc
         )
 
