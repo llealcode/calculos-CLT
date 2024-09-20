@@ -5,11 +5,20 @@ class UpperBar(ft.AppBar):
     def __init__(self, page):
 
         super().__init__(
-            leading=ft.Icon(ft.icons.WALLET_TRAVEL),
+            leading=ft.Icon(ft.icons.MORE_TIME_ROUNDED),
             leading_width=40,
-            title=ft.Text("Cálculos trabalhistas"),
+            title=ft.Text("Horas extras", size=20),
             center_title=False,
-            bgcolor=ft.colors.with_opacity(opacity=0.3, color=ft.colors.BLACK)
+            actions=[
+                ft.PopupMenuButton(
+                    items=[
+                        ft.PopupMenuItem(text='Como cálcular?'),
+                        ft.PopupMenuItem(text='Como cálcular?'),
+                        ft.PopupMenuItem(text='Como cálcular?'),
+                        ft.PopupMenuItem(text='Como cálcular?')
+                    ]
+                )
+            ]
         )
 
 class BottomBar(ft.BottomAppBar):
@@ -73,18 +82,16 @@ class Headers(ft.Text):
 
 class CampoTxt(ft.Column):
     
-    def __init__(self, texto, prefix=None):
+    def __init__(self, texto, **kwargs):
         self.texto = texto
-        self.prefix = prefix
 
         super().__init__(
             controls=[
                 ft.Text(value=self.texto, size=13, color=ft.colors.WHITE),
                 ft.TextField(
                     height=45,
-                    prefix_text=self.prefix,
                     content_padding=ft.padding.symmetric(horizontal=10),
-                    border_radius=ft.border_radius.all(3),
+                    border_radius=ft.border_radius.all(7),
                     border_width=0.5,
                     border_color=ft.colors.GREY_500,
                     focused_border_width=1,
@@ -92,7 +99,8 @@ class CampoTxt(ft.Column):
                     text_align=ft.TextAlign.START,
                     keyboard_type=ft.KeyboardType.NUMBER,
                     cursor_color=ft.colors.GREY_300,
-                    cursor_width=0.7
+                    cursor_width=0.7,
+                    **kwargs
                 )
             ],
             spacing=7
@@ -109,11 +117,12 @@ class CalcButton(ft.ElevatedButton):
             text='Calcular',
             icon=ft.icons.CALCULATE_ROUNDED,
             style=ft.ButtonStyle(
-                bgcolor=ft.colors.GREEN,
+                bgcolor=ft.colors.GREEN_800,
                 color=ft.colors.WHITE,
-                shape=ft.RoundedRectangleBorder(radius=5),
+                shape=ft.RoundedRectangleBorder(radius=7),
             ),
             height=45,
+            expand=True,
             on_click=calc
         )
 
