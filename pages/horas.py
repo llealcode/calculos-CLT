@@ -1,7 +1,7 @@
 import flet as ft
 from components import components
 
-class ViewHoras(ft.Column):
+class CorpoHoras(ft.Column):
 
     def __init__(self, page):
 
