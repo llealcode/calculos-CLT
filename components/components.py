@@ -5,76 +5,64 @@ class UpperBar(ft.AppBar):
     def __init__(self, page):
 
         super().__init__(
-            leading=ft.Icon(ft.icons.MORE_TIME_ROUNDED),
+            leading=ft.Icon(ft.icons.WALLET_TRAVEL),
             leading_width=40,
-            title=ft.Text("Horas extras", size=20),
+            title=ft.Text("Cálculos trabalhistas"),
             center_title=False,
-            actions=[
-                ft.PopupMenuButton(
-                    items=[
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?')
-                    ]
-                )
-            ]
+            bgcolor=ft.colors.with_opacity(opacity=0.3, color=ft.colors.BLACK)
         )
 
 class BottomBar(ft.BottomAppBar):
     
     def __init__(self, page):
 
-        self.Horas_Button = BarButton(texto='Horas', icone=ft.icons.TIMER_ROUNDED, estado='inativo')
-        self.Ferias_Button = BarButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo')
-        self.Rescisao_Button = BarButton(texto='Rescisão', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo')
-        self.decimo_terceiro_Button = BarButton(texto='13º', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo')
+        self.botoes = {
+        'horas': BarButton(texto='Horas', icone=ft.icons.TIMER_ROUNDED, estado='inativo'),
+        'ferias': BarButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo'),
+        'rescisao': BarButton(texto='Rescisão', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo'),
+        'decimo_terceiro': BarButton(texto='13º', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo')
+        }
 
         super().__init__(
             content=ft.Row(
-                controls=[
-                    self.Horas_Button,
-                    self.Ferias_Button,
-                    self.Rescisao_Button,
-                    self.decimo_terceiro_Button
-                ],
+                controls=list(
+                    self.botoes.values()),
                 alignment=ft.MainAxisAlignment.SPACE_EVENLY
             ),
             bgcolor=ft.colors.BLACK45,
             height=page.height*0.12
         )
 
-        def get_button(self, nome_botao):
-            return self.buttons.get(nome_botao)
 
 class BarButton(ft.Container):
     
     def __init__(self, texto, icone, estado):
-        self.texto=texto
-        self.icone=icone
         self.estado=estado
+        self.texto=ft.Text(value=texto, color=self._definir_cor())
+        self.icone=ft.Icon(name=icone, color=self._definir_cor())
 
         super().__init__(
             content=ft.Container(
                content= ft.Column(
                     controls=[
-                        icon_button:=ft.Icon(name=self.icone, color=ft.colors.WHITE if estado=='ativo' else ft.colors.GREY_800),
-                        icon_text:=ft.Text(value=self.texto, color=ft.colors.WHITE if estado=='ativo' else ft.colors.GREY_800)
+                        self.icone,
+                        self.texto
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER
-                ),
-                on_click=self.mudar_estado()
+                )
             )
         )
 
-    def mudar_estado(self, estado):
+    def _definir_cor(self):
+        return ft.colors.WHITE if self.estado == 'ativo' else ft.colors.GREY_800
 
-        self.estado = 'inativo' if self.estado == 'ativo' else 'ativo'
-        icone = self.content.content.controls[0]
-        texto = self.content.content.controls[1]
-        icone.color = ft.colors.WHITE if estado == 'ativo' else ft.colors.GREY_800
-        texto.color = ft.colors.WHITE if estado == 'ativo' else ft.colors.GREY_800
-        self.update()
+    def mudar_estado(self, novo_estado):
+        self.estado = novo_estado
+        self.icone.color = self._definir_cor
+        self.texto.color = self._definir_cor
+
+        if self.page is not None:
+            self.update()
 
 class Alert(ft.Text):
     
@@ -111,7 +99,7 @@ class CampoTxt(ft.Column):
                 ft.TextField(
                     height=45,
                     content_padding=ft.padding.symmetric(horizontal=10),
-                    border_radius=ft.border_radius.all(7),
+                    border_radius=ft.border_radius.all(3),
                     border_width=0.5,
                     border_color=ft.colors.GREY_500,
                     focused_border_width=1,
@@ -139,7 +127,7 @@ class CalcButton(ft.ElevatedButton):
             style=ft.ButtonStyle(
                 bgcolor=ft.colors.GREEN_800,
                 color=ft.colors.WHITE,
-                shape=ft.RoundedRectangleBorder(radius=7),
+                shape=ft.RoundedRectangleBorder(radius=5),
             ),
             height=45,
             expand=True,
