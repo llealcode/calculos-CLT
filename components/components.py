@@ -17,10 +17,11 @@ class BottomBar(ft.BottomAppBar):
     def __init__(self, page):
 
         self.botoes = {
-        'horas': BarButton(texto='Horas', icone=ft.icons.TIMER_ROUNDED, estado='inativo'),
-        'ferias': BarButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo'),
-        'rescisao': BarButton(texto='Rescisão', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo'),
-        'decimo_terceiro': BarButton(texto='13º', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo')
+            'horas': BarButton(texto='Horas', icone=ft.icons.TIMER_ROUNDED, estado='inativo', page=page, rota="/horas),
+            'ferias': BarButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo', page=page, rota="/ferias),
+            'rescisao': BarButton(texto='Rescisão', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo', page=page, rota="/rescisao),
+            'decimo_terceiro': BarButton(texto='13º', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo', page=page, rota="/decimo_terceiro"),
+            'adicional_noturno': BarButton(texto='Adicional', icone=ft.icons.NIGHT_TIME, estado='inativo', page=page, rota="/adicional_noturno")
         }
 
         super().__init__(
@@ -36,10 +37,12 @@ class BottomBar(ft.BottomAppBar):
 
 class BarButton(ft.Container):
     
-    def __init__(self, texto, icone, estado):
-        self.estado=estado
-        self.texto=ft.Text(value=texto, color=self._definir_cor())
-        self.icone=ft.Icon(name=icone, color=self._definir_cor())
+    def __init__(self, texto, icone, estado, page, rota):
+        self.estado = estado
+        self.page = page
+        self.rota = rota
+        self.texto = ft.Text(value=texto, color=self._definir_cor())
+        self.icone = ft.Icon(name=icone, color=self._definir_cor())
 
         super().__init__(
             content=ft.Container(
@@ -50,7 +53,8 @@ class BarButton(ft.Container):
                     ],
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER
                 )
-            )
+            ),
+            on_click = self.navegar
         )
 
     def _definir_cor(self):
@@ -60,9 +64,12 @@ class BarButton(ft.Container):
         self.estado = novo_estado
         self.icone.color = self._definir_cor
         self.texto.color = self._definir_cor
-
+                                  
         if self.page is not None:
-            self.update()
+        self.update()
+
+    def navegar(self, page):
+        self.page.go(self.rota)
 
 class Alert(ft.Text):
     
