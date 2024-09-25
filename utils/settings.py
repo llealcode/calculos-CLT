@@ -52,22 +52,22 @@ def layout(page):
     def mudar_rota(e):
        
         page.views.clear()
-					bottom_bar = BottomBar(page)
+	bottom_bar = BottomBar(page)
 
         if page.route == "/":
             view = ViewsPage(rota=page.route, conteudo=ViewHome(page=page))
         if page.route == "/horas":
-            view = ViewsPage(rota=page.route, conteudo=telas.CorpoHoras(page=page), bottom_appbar=BottomBar(page=page))
-					if page.route = "/ferias":
-								view = ViewsPage(rota=page.route, conteudo=telas.CorpoFerias(page=page), bottom_appbar=bottom_bar)
-					if page.route = "/rescisao":
-								view = ViewsPage(rota=page.route, conteudo=telas.CorpoRescisao(page=page, bottom_appbar=bottom_bar)
-					if page.route = "/decimo_terceiro":
-								view = ViewsPage(rota=page.route, conteudo=telas.CorpoDecimo(page=page), bottom_appbar=bottom_bar)
-					if page.route = "/adicional_noturno":
-								view = ViewsPage(rota=page.route, conteudo=telas.CorpoNoturno(page=page), bottom_appbar=bottom_bar)
+            view = ViewsPage(rota=page.route, conteudo=telas.CorpoHoras(page=page), bottom_appbar=bottom_bar)
+	if page.route == "/ferias":
+	    view = ViewsPage(rota=page.route, conteudo=telas.CorpoFerias(page=page), bottom_appbar=bottom_bar)
+	if page.route == "/rescisao":
+	    view = ViewsPage(rota=page.route, conteudo=telas.CorpoRescisao(page=page, bottom_appbar=bottom_bar)
+	if page.route == "/decimo_terceiro":
+	    view = ViewsPage(rota=page.route, conteudo=telas.CorpoDecimo(page=page), bottom_appbar=bottom_bar)
+	if page.route == "/adicional_noturno":
+	    view = ViewsPage(rota=page.route, conteudo=telas.CorpoNoturno(page=page), bottom_appbar=bottom_bar)
 
-					for nome_botao, botao in bottom_bar.botoes.items():
+	for nome_botao, botao in bottom_bar.botoes.items():
             botao.mudar_estado('ativo' if nome_botao == page.route[1:] else 'inativo')
 
         page.views.append(view)
