@@ -1,4 +1,5 @@
 import flet as ft
+from utils import settings
 
 class UpperBar(ft.AppBar):
     
@@ -9,6 +10,16 @@ class UpperBar(ft.AppBar):
             leading_width=40,
             title=ft.Text("Cálculos trabalhistas"),
             center_title=False,
+            actions=[
+                ft.PopupMenuButton(
+                    items=[
+                        ft.PopupMenuItem(text='Como cálcular?'),
+                        ft.PopupMenuItem(text='Como cálcular?'),
+                        ft.PopupMenuItem(text='Como cálcular?'),
+                        ft.PopupMenuItem(text='Como cálcular?')
+                    ]
+                )
+            ]
             bgcolor=ft.colors.with_opacity(opacity=0.3, color=ft.colors.BLACK)
         )
 
@@ -17,17 +28,16 @@ class BottomBar(ft.BottomAppBar):
     def __init__(self, page):
 
         self.botoes = {
-            'horas': BarButton(texto='Horas', icone=ft.icons.TIMER_ROUNDED, estado='inativo', page=page, rota="/horas),
-            'ferias': BarButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo', page=page, rota="/ferias),
-            'rescisao': BarButton(texto='Rescisão', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo', page=page, rota="/rescisao),
+            'horas': BarButton(texto='Horas', icone=ft.icons.TIMER_ROUNDED, estado='inativo', page=page, rota="/horas"),
+            'ferias': BarButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, estado='inativo', page=page, rota="/ferias"),
+            'rescisao': BarButton(texto='Rescisão', icone=ft.icons.POWER_OFF_ROUNDED, estado='inativo', page=page, rota="/rescisao"),
             'decimo_terceiro': BarButton(texto='13º', icone=ft.icons.MONETIZATION_ON_ROUNDED, estado='inativo', page=page, rota="/decimo_terceiro"),
-            'adicional_noturno': BarButton(texto='Adicional', icone=ft.icons.NIGHT_TIME, estado='inativo', page=page, rota="/adicional_noturno")
+            'adicional_noturno': BarButton(texto='Adicional', icone=ft.icons.MODE_NIGHT, estado='inativo', page=page, rota="/adicional_noturno")
         }
 
         super().__init__(
             content=ft.Row(
-                controls=list(
-                    self.botoes.values()),
+                controls=list(self.botoes.values()),
                 alignment=ft.MainAxisAlignment.SPACE_EVENLY
             ),
             bgcolor=ft.colors.BLACK45,
@@ -54,19 +64,23 @@ class BarButton(ft.Container):
                     horizontal_alignment=ft.CrossAxisAlignment.CENTER
                 )
             ),
-            on_click = self.navegar
+            on_click=self.navegar
         )
+    
+    def navegar(self, _):
+        self.page.go(self.rota)
 
     def _definir_cor(self):
         return ft.colors.WHITE if self.estado == 'ativo' else ft.colors.GREY_800
-
+    
     def mudar_estado(self, novo_estado):
+
         self.estado = novo_estado
-        self.icone.color = self._definir_cor
-        self.texto.color = self._definir_cor
-                                  
+        self.icone.color = self._definir_cor()
+        self.texto.color = self._definir_cor()
+
         if self.page is not None:
-        self.update()
+            self.update()
 
     def navegar(self, page):
         self.page.go(self.rota)
@@ -150,7 +164,6 @@ class OptionButton(ft.IconButton):
         self.rota = rota
 
         super().__init__(
-            text=texto,
             icon=icone,
             style=ft.ButtonStyle(
                 overlay_color=ft.colors.GREY_700,
