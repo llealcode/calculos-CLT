@@ -12,10 +12,11 @@ class UpperBar(ft.AppBar):
             actions=[
                 ft.PopupMenuButton(
                     items=[
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?')
+                        ft.PopupMenuItem(text='Como cálcular horas?'),
+                        ft.PopupMenuItem(text='Como cálcular FGTS?'),
+                        ft.PopupMenuItem(text='Como cálcular 13º?'),
+                        ft.PopupMenuItem(text='Como cálcular Rescição?'),
+                        ft.PopupMenuItem(text='Sobre aplicativo')
                     ]
                 )
             ]
