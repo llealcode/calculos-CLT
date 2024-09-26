@@ -56,18 +56,37 @@ class BarButton(ft.IconButton):
             )
         )
 
-class Alert(ft.Text):
+class AlertHoras(ft.AlertDialog):
     
-    def __init__(self, valor=0):
+    def __init__(self, page, salario, jornada, horas, taxa):
+        self.salario = float(salario)
+        self.jornada = int(jornada)
+        self.horas = int(horas)
+        self.taxa = float(taxa)
+
+        self.total = str(f'R$ '+f'{((self.salario/self.jornada)*self.horas)+(((self.salario/self.jornada)*self.horas)*(self.taxa/100)):.2f}').replace('.', ',')
 
         super().__init__(
-            value=valor,
-            size=30,
-            color=ft.colors.TRANSPARENT,
-            weight=ft.FontWeight.BOLD
+            modal=False,
+            open=False,
+            title=ft.Text(value='Horas extras', size=22, weight=ft.FontWeight.W_500),
+            shape=ft.RoundedRectangleBorder(radius=10),
+            bgcolor=ft.colors.BLACK87,
+            content=ft.Container(
+                border_radius=ft.border_radius.all(10),
+                padding=ft.padding.all(20),
+                alignment=ft.alignment.center,
+                height=page.window.height*0.3,
+                content=ft.Column(
+                    controls=[
+                        ft.Text(value='Você receberá:'),
+                        ft.Text(value=self.total, size=22, color=ft.colors.GREEN),
+                        ft.Icon(name=ft.icons.MOOD_ROUNDED, color=ft.colors.GREEN, size=40)
+                    ],
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                )
+                )
         )
-
-        self.valor=valor
 
 class Headers(ft.Text):
     
@@ -108,10 +127,13 @@ class CampoTxt(ft.Column):
 
 class CalcButton(ft.ElevatedButton):
     
-    def __init__(self):
+    def __init__(self, page):
 
-        def calc(e):
-            pass
+        # def calc(e):
+        #     alert_calcular_horas = AlertHoras(page=page)
+        #     page.overlay.append(alert_calcular_horas)
+        #     page.overlay[0].open = True
+        #     page.update()
 
         super().__init__(
             text='Calcular',
@@ -123,7 +145,7 @@ class CalcButton(ft.ElevatedButton):
             ),
             height=45,
             expand=True,
-            on_click=calc
+            # on_click=calc
         )
 
 

@@ -3,6 +3,8 @@ from pages.home import ViewHome
 from pages.horas import ViewHoras
 from components.components import UpperBar, BottomBar
 
+from components import components
+
 
 def layout(page):
     
@@ -60,3 +62,8 @@ def layout(page):
 
     page.on_route_change = mudar_rota
     page.go('/horas')
+
+    # Overlay
+    # alert_calcular_horas = components.AlertHoras(page=page)
+
+    # page.overlay.append(alert_calcular_horas)
