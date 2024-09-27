@@ -3,24 +3,24 @@ from utils import settings
 
 class UpperBar(ft.AppBar):
     
-    def __init__(self, page):
+    def __init__(self, leading, page, title):
 
         super().__init__(
-            leading=ft.Icon(ft.icons.WALLET_TRAVEL),
+            leading=ft.Icon(leading),
             leading_width=40,
-            title=ft.Text("Cálculos trabalhistas"),
+            title=ft.Text(title, size=20),
             center_title=False,
             actions=[
                 ft.PopupMenuButton(
                     items=[
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?'),
-                        ft.PopupMenuItem(text='Como cálcular?')
+                        ft.PopupMenuItem(text='Como cálcular horas?'),
+                        ft.PopupMenuItem(text='Como cálcular FGTS?'),
+                        ft.PopupMenuItem(text='Como cálcular 13º?'),
+                        ft.PopupMenuItem(text='Como cálcular Rescição?'),
+                        ft.PopupMenuItem(text='Sobre aplicativo')
                     ]
                 )
             ]
-            bgcolor=ft.colors.with_opacity(opacity=0.3, color=ft.colors.BLACK)
         )
 
 class BottomBar(ft.BottomAppBar):
