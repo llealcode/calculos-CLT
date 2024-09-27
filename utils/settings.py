@@ -44,7 +44,6 @@ def layout(page):
                 controls=[self.conteudo],
                 padding=0,
                 spacing=0,
-                appbar=UpperBar(page=page),
                 **kwargs
             )
 
