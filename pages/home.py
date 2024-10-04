@@ -2,7 +2,7 @@ import flet as ft
 from components.components import CalcButton
 from components.components import CampoTxt
 from components.components import Headers
-from components.components import Alert
+from components.components import AlertHoras
 from components.components import OptionButton
 from components.components import HomePageMessage
 
@@ -11,7 +11,7 @@ class ViewHome(ft.Container):
 
     def __init__(self, page):
 
-        self.resultado = Alert()
+        self.resultado = AlertHoras()
         self.mensagem = HomePageMessage()
         self.horas = OptionButton(texto='Horas extras', icone=ft.icons.TIMER_ROUNDED, rota="/horas", page=page)
         self.ferias = OptionButton(texto='Férias', icone=ft.icons.BEACH_ACCESS_ROUNDED, rota="/ferias", page=page)
